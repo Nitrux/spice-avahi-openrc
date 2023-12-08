@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#   Add cryptsetup service files to runlevel/default
+
+/bin/cp /etc/init.d/{spice-webdavd,avahi-daemon} /etc/runlevels/default || true
+
+#   Add service files to runlevel/default
+
+rc-update add spice-webdavd default
+rc-update add avahi-daemon default
+
+#   Update services list
+
+rc-update -u

@@ -1,0 +1,30 @@
+#!/sbin/openrc-run
+
+# Service details
+name="Spice WebDAV Daemon"
+description="webdav daemon for Spice guests"
+
+# Command to start the service
+command="/usr/sbin/spice-webdavd"
+command_args="-p 9843 ${SPICE_WEBDAVD_EXTRA_ARGS}"
+command_background="yes"
+
+# Load environment variables
+pidfile="/run/${RC_SVCNAME}.pid"
+
+depend() {
+    need dbus avahi-daemon
+    after dbus avahi-daemon
+}
+
+start_pre() {
+    # Load any environment variables from /etc/default/spice-webdavd if it exists
+    if [ -f "/etc/default/spice-webdavd" ]; then
+        . /etc/default/spice-webdavd
+    fi
+}
+
+# Automatically restart the service on success
+restart_on() {
+    return 0
+}

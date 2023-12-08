@@ -1,0 +1,34 @@
+#!/sbin/openrc-run
+
+# Service details
+name="Avahi Daemon"
+description="Avahi mDNS/DNS-SD Stack"
+
+# Command to start the service
+command="/usr/sbin/avahi-daemon"
+command_args="-s"
+command_background="yes"
+
+# Load environment variables
+pidfile="/run/${RC_SVCNAME}.pid"
+
+depend() {
+    # Specify any dependencies, if necessary
+    need network-manager
+}
+
+start_pre() {
+    # Check or prepare the environment before starting the service
+    checkpath --directory /var/run/avahi-daemon
+}
+
+stop_post() {
+    # Any cleanup tasks after the service is stopped
+}
+
+reload() {
+    # Custom command to reload the configuration
+    ebegin "Reloading ${name}"
+    start-stop-daemon --signal HUP --pidfile "${pidfile}"
+    eend $?
+}
