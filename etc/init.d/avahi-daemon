@@ -22,10 +22,6 @@ start_pre() {
     checkpath --directory /var/run/avahi-daemon
 }
 
-stop_post() {
-    # Any cleanup tasks after the service is stopped
-}
-
 reload() {
     # Custom command to reload the configuration
     ebegin "Reloading ${name}"
