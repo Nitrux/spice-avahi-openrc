@@ -13,8 +13,8 @@ command_background="yes"
 pidfile="/run/${RC_SVCNAME}.pid"
 
 depend() {
-    need dbus avahi-daemon
-    after dbus avahi-daemon
+    need dbus avahi-daemon-openrc
+    after dbus avahi-daemon-openrc
 }
 
 start_pre() {

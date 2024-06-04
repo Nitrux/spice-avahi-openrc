@@ -1,3 +1,9 @@
+spice-avahi-openrc (0.0.4)  nitrux; urgency=medium
+
+  * Fix spice-webdavd-openrc dependency.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Tue, 04 Jun 2024 06:43:00 -0500
+
 spice-avahi-openrc (0.0.3)  nitrux; urgency=medium
 
   * Rename scripts.
