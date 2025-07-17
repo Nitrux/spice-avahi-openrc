@@ -1,30 +1,20 @@
 #!/sbin/openrc-run
+# Copyright (c) 2007-2021 The Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
 
-# Service details
-name="Spice WebDAV Daemon"
-description="webdav daemon for Spice guests"
+description="Starts the SPICE WebDAV daemon for guest file sharing"
 
-# Command to start the service
+# Configuration is sourced automatically from the companion conf.d file
+# /etc/conf.d/spice-webdavd
+
 command="/usr/sbin/spice-webdavd"
-command_args="-p 9843 ${SPICE_WEBDAVD_EXTRA_ARGS}"
-command_background="yes"
-
-# Load environment variables
+command_args="-p 9843 ${spice_webdavd_opts}"
 pidfile="/run/${RC_SVCNAME}.pid"
 
+# This supervisor ensures the daemon is always running and restarts it if it crashes.
+supervisor=supervise-daemon
+
 depend() {
-    need dbus avahi-daemon-openrc
-    after dbus avahi-daemon-openrc
-}
-
-start_pre() {
-    # Load any environment variables from /etc/default/spice-webdavd if it exists
-    if [ -f "/etc/default/spice-webdavd" ]; then
-        . /etc/default/spice-webdavd
-    fi
-}
-
-# Automatically restart the service on success
-restart_on() {
-    return 0
+	# Needs D-Bus and the Avahi daemon to be running.
+	need dbus avahi-daemon
 }

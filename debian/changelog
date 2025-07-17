@@ -1,3 +1,9 @@
+spice-avahi-openrc (0.0.5)  nitrux; urgency=medium
+
+  * Refactor and rename service files.
+
+ -- Uri Herrera <uri_herrera@nxos.org>  Thu, 17 Jul 2025 17:28:00 -0500
+
 spice-avahi-openrc (0.0.4)  nitrux; urgency=medium
 
   * Fix spice-webdavd-openrc dependency.
